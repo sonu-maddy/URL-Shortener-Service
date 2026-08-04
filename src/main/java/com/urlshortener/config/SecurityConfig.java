@@ -88,12 +88,12 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
                         .requestMatchers("/api/auth/**").permitAll()
-
                         .requestMatchers("/r/**").permitAll()
+
+                        // Guest can shorten URLs
+                        .requestMatchers(HttpMethod.POST, "/api/urls/shorten").permitAll()
 
                         .requestMatchers(
                                 "/swagger-ui/**",

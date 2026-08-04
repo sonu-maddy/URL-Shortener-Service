@@ -25,10 +25,21 @@ public class UrlController {
     private final UserRepository userRepository;
 
     @PostMapping("/shorten")
-    public ResponseEntity<UrlResponse> shorten(@Valid @RequestBody ShortenRequest request,
-                                               Authentication authentication) {
-        User owner = currentUser(authentication);
-        return ResponseEntity.status(HttpStatus.CREATED).body(urlService.shorten(request, owner));
+    public ResponseEntity<UrlResponse> shorten(
+            @Valid @RequestBody ShortenRequest request,
+            Authentication authentication) {
+
+        User owner = null;
+
+        if (authentication != null
+                && authentication.isAuthenticated()
+                && !"anonymousUser".equals(authentication.getName())) {
+
+            owner = currentUser(authentication);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(urlService.shorten(request, owner));
     }
 
     @GetMapping("/my")

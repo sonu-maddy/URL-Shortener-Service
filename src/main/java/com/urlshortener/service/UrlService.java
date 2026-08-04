@@ -109,7 +109,7 @@ public class UrlService {
         return UrlResponse.builder()
                 .id(mapping.getId())
                 .originalUrl(mapping.getOriginalUrl())
-                .shortCode(mapping.getShortCode())
+                  .shortCode(mapping.getShortCode())
                 .shortUrl(baseUrl + mapping.getShortCode())
                 .clickCount(mapping.getClickCount())
                 .createdAt(mapping.getCreatedAt())
